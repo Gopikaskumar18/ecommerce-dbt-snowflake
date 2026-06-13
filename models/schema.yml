@@ -1,0 +1,94 @@
+version: 2
+
+models:
+  - name: stg_orders
+    description: "Cleaned and standardized order records from RAW layer"
+    columns:
+      - name: order_id
+        description: "Unique order identifier"
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: "FK to customers"
+        tests:
+          - not_null
+      - name: status
+        description: "Order status"
+        tests:
+          - accepted_values:
+              values: ['completed', 'returned', 'cancelled', 'pending']
+      - name: gross_amount
+        description: "Order amount before discounts"
+        tests:
+          - not_null
+      - name: net_amount
+        description: "Order amount after discounts"
+        tests:
+          - not_null
+
+  - name: stg_customers
+    description: "Cleaned customer master records"
+    columns:
+      - name: customer_id
+        description: "Unique customer identifier"
+        tests:
+          - unique
+          - not_null
+      - name: email
+        description: "Customer email (lowercased)"
+        tests:
+          - unique
+          - not_null
+      - name: customer_segment
+        tests:
+          - accepted_values:
+              values: ['Vip', 'Regular', 'New', 'At-Risk', 'Churned']
+
+  - name: stg_products
+    description: "Cleaned product catalog with margin calculations"
+    columns:
+      - name: product_id
+        tests:
+          - unique
+          - not_null
+      - name: gross_margin_pct
+        description: "Gross margin as a percentage of unit price"
+
+  - name: mart_customer_360
+    description: "Gold layer: one row per customer with full lifetime metrics, RFM scores, and churn risk"
+    columns:
+      - name: customer_id
+        tests:
+          - unique
+          - not_null
+      - name: recency_score
+        description: "RFM Recency score 1-5 (5 = most recent)"
+        tests:
+          - not_null
+      - name: frequency_score
+        description: "RFM Frequency score 1-5 (5 = most frequent)"
+      - name: monetary_score
+        description: "RFM Monetary score 1-5 (5 = highest spend)"
+      - name: churn_risk
+        tests:
+          - accepted_values:
+              values: ['High Risk', 'Medium Risk', 'Low Risk']
+
+  - name: mart_revenue
+    description: "Gold layer: daily revenue facts by category, country, and segment"
+    columns:
+      - name: revenue_date
+        tests:
+          - not_null
+      - name: gross_revenue
+        tests:
+          - not_null
+
+  - name: mart_channel_attribution
+    description: "Gold layer: first-touch channel attribution with LTV by acquisition source"
+    columns:
+      - name: first_touch_channel
+        tests:
+          - not_null
+          - unique
