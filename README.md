@@ -79,14 +79,7 @@ dbt docs generate && dbt docs serve   # Lineage graph at localhost:8080
 - Referential integrity between orders and customers
 - Custom: `net_amount` ≤ `gross_amount` on every row
 
-## Business Questions Answered
 
-| Question | Model |
-|----------|-------|
-| LTV, RFM score, churn risk per customer? | `mart_customer_360` |
-| Revenue and profit by product category? | `mart_revenue` |
-| Which channel acquires highest-LTV customers? | `mart_channel_attribution` |
-| Monthly cohort retention? | `analyses/cohort_retention.sql` |
 
 ## Project Structure
 
