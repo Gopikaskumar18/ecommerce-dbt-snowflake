@@ -101,6 +101,6 @@ dbt docs generate && dbt docs serve   # Lineage graph at localhost:8080
 ![dbt test](dbt_run.png)
 
 ### Lineage Graph
-![Lineage Graph](lineage_graph.png)
+![Lineage Graph](dbt_lineage.png)
 
 
