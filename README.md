@@ -98,7 +98,7 @@ dbt docs generate && dbt docs serve   # Lineage graph at localhost:8080
 ```
 
 ### dbt test — 18/18 tests passing
-![dbt test](screenshots/dbt_test.png)
+![dbt test](screenshots/dbt_run.png)
 
 ### Lineage Graph
 ![Lineage Graph](screenshots/lineage_graph.png)
