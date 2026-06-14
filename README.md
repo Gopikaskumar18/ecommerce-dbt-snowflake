@@ -97,5 +97,10 @@ dbt docs generate && dbt docs serve   # Lineage graph at localhost:8080
 └── profiles.yml
 ```
 
----
-*Gopika Sree Kumar · [GitHub](https://github.com/Gopikaskumar18) · [LinkedIn](https://linkedin.com/in/gopika-sree-kumar-895aa3160)*
+### dbt test — 18/18 tests passing
+![dbt test](screenshots/dbt_test.png)
+
+### Lineage Graph
+![Lineage Graph](screenshots/lineage_graph.png)
+
+
